@@ -1,22 +1,26 @@
-def add_element(shooting_list: list) -> None:
-    shooting_list.append(input("Entrer le nom d'un élément à ajouter à la liste de courses : "))
-    print(f"L'élément {shooting_list[-1]} a bien été ajouté à la liste.")
+class ShoppingList:
+    def __init__(self) -> None:
+        self.list = [] 
 
-def remove_element(shooting_list: list) -> None:
-    element = input("Entrer le nom d'un élément à retirer de la liste de courses : ")
-    try:
-        shooting_list.remove(element)
-        print(f"L'élément {element} a bien été supprimé de la liste.")
-    except ValueError:
-        print(f"L'élément {element} n'est pas dans la liste.")
+    def add(self) -> None:
+        self.list.append(input("Entrer le nom d'un élément à ajouter à la liste de courses : "))
+        print(f"L'élément {self.list[-1]} a bien été ajouté à la liste.")
 
-def print_list(shooting_list: list) -> None:
-    for i, element in enumerate(shooting_list):
-        print(f"{i+1}. {element}")
+    def remove(self) -> None:
+        element = input("Entrer le nom d'un élément à retirer de la liste de courses : ")
+        try:
+            self.list.remove(element)
+            print(f"L'élément {element} a bien été supprimé de la liste.")
+        except ValueError:
+            print(f"L'élément {element} n'est pas dans la liste.")
 
-def clear_list(shooting_list: list) -> None:
-    shooting_list.clear()
-    print("La liste a été vider de son contenu")
+    def print(self) -> None:
+        for i, element in enumerate(self.list):
+            print(f"{i+1}. {element}")
+
+    def clear(self) -> None:
+        self.list.clear()
+        print("La liste a été vider de son contenu")
 
 # ----------------------------------------------------------------------
 
@@ -27,18 +31,18 @@ MENU = """\nChoisssez parmi les 5 options suivantes:
 4: Vider la liste
 5: Quitter"""
 
-shooting_list: list = []
+shoopping_list: ShoppingList = ShoppingList()
 while True:
     print(MENU)
     choice = input(">> Votre choix : ")
     if choice == "1":
-        add_element(shooting_list)
+        shoopping_list.add()
     elif choice == "2":
-       remove_element(shooting_list)
+       shoopping_list.remove()
     elif choice == "3":
-        print_list(shooting_list)
+        shoopping_list.print()
     elif choice == "4":
-        clear_list(shooting_list)
+        shoopping_list.clear()
     elif choice == "5":
         print("A bientôt !")
         break
