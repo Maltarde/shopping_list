@@ -1,6 +1,11 @@
+import json
+
 class ShoppingList:
     def __init__(self) -> None:
-        self.list = [] 
+        try:
+            self.list: list = self._read()
+        except FileNotFoundError:
+            self.list: list = []
 
     def add(self) -> None:
         self.list.append(input("Entrer le nom d'un élément à ajouter à la liste de courses : "))
@@ -22,6 +27,15 @@ class ShoppingList:
         self.list.clear()
         print("La liste a été vider de son contenu")
 
+    def save(self) -> None:
+        with open("list.json", "w") as f:
+            json.dump(self.list, f, indent=4)
+            print("La liste a bien été enregistrée")
+
+    def _read(self) -> list:
+        with open("list.json", "r") as f:
+            return json.load(f)
+
 # ----------------------------------------------------------------------
 
 MENU = """\nChoisssez parmi les 5 options suivantes:
@@ -29,7 +43,8 @@ MENU = """\nChoisssez parmi les 5 options suivantes:
 2: Retirer un élément de la liste
 3: Afficher la liste
 4: Vider la liste
-5: Quitter"""
+5: Enregistrer la liste
+6: Quitter"""
 
 shoopping_list: ShoppingList = ShoppingList()
 while True:
@@ -44,6 +59,8 @@ while True:
     elif choice == "4":
         shoopping_list.clear()
     elif choice == "5":
+        shoopping_list.save()
+    elif choice == "6":
         print("A bientôt !")
         break
 
