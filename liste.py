@@ -1,6 +1,7 @@
 import json
 
 class ShoppingList:
+    """Shopping list gestoin class"""
     def __init__(self) -> None:
         try:
             self.list: list = self._read()
@@ -8,10 +9,12 @@ class ShoppingList:
             self.list: list = []
 
     def add(self) -> None:
+        """Add an item to the list"""
         self.list.append(input("Entrer le nom d'un élément à ajouter à la liste de courses : "))
         print(f"L'élément {self.list[-1]} a bien été ajouté à la liste.")
 
     def remove(self) -> None:
+        """Remove a given element from the list"""
         element = input("Entrer le nom d'un élément à retirer de la liste de courses : ")
         try:
             self.list.remove(element)
@@ -20,19 +23,23 @@ class ShoppingList:
             print(f"L'élément {element} n'est pas dans la liste.")
 
     def print(self) -> None:
+        """Display the list"""
         for i, element in enumerate(self.list):
             print(f"{i+1}. {element}")
 
     def clear(self) -> None:
+        """Empty the list"""
         self.list.clear()
         print("La liste a été vider de son contenu")
 
     def save(self) -> None:
+        """Save the list to a 'list.json' file"""
         with open("list.json", "w") as f:
             json.dump(self.list, f, indent=4)
             print("La liste a bien été enregistrée")
 
     def _read(self) -> list:
+        """Get the list in the 'list.json' file"""
         with open("list.json", "r") as f:
             return json.load(f)
 
