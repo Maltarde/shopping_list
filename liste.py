@@ -9,10 +9,8 @@ class ShoppingList:
             self.list: list = []
 
     def __str__(self) -> str:
-        list = ""
-        for i, element in enumerate(self.list):
-            list +=f"{i+1}. {element}\n"
-        return list
+        list = [f"{i+1}. {element}" for i, element in enumerate(self.list)]
+        return "\n".join(list)
 
     def add(self) -> None:
         """Add an item to the list"""
