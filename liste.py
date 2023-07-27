@@ -8,6 +8,12 @@ class ShoppingList:
         except FileNotFoundError:
             self.list: list = []
 
+    def __str__(self) -> str:
+        list = ""
+        for i, element in enumerate(self.list):
+            list +=f"{i+1}. {element}\n"
+        return list
+
     def add(self) -> None:
         """Add an item to the list"""
         self.list.append(input("Entrer le nom d'un élément à ajouter à la liste de courses : "))
@@ -21,11 +27,6 @@ class ShoppingList:
             print(f"L'élément {element} a bien été supprimé de la liste.")
         except ValueError:
             print(f"L'élément {element} n'est pas dans la liste.")
-
-    def print(self) -> None:
-        """Display the list"""
-        for i, element in enumerate(self.list):
-            print(f"{i+1}. {element}")
 
     def clear(self) -> None:
         """Empty the list"""
@@ -62,7 +63,7 @@ while True:
     elif choice == "2":
        shoopping_list.remove()
     elif choice == "3":
-        shoopping_list.print()
+        print(shoopping_list)
     elif choice == "4":
         shoopping_list.clear()
     elif choice == "5":
