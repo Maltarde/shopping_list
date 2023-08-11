@@ -20,8 +20,7 @@ class ShoppingList:
 
     def __str__(self) -> str:
         logging.debug(f"Display the list")
-        list = [f"{i+1}. {element}" for i, element in enumerate(self.list)]
-        return "\n".join(list)
+        return "\n".join([f"{i+1}. {element}" for i, element in enumerate(self.list)])
 
     def add(self) -> None:
         """Add an item to the list"""
